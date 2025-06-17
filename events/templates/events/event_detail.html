@@ -1,0 +1,14 @@
+<h1>{{ event.name }}</h1>
+<p><strong>Date:</strong> {{ event.date }}</p>
+<p><strong>Description:</strong> {{ event.description }}</p>
+
+{% if user.is_authenticated %}
+    <form method="post" action="{% url 'register_event' event.id %}">
+        {% csrf_token %}
+        <button type="submit">Register for this event</button>
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Login</a> to register for this event.</p>
+{% endif %}
+
+<p><a href="{% url 'event_list' %}">Back to events</a></p>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register for {{ event.title }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f9ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+        }
+        h2 {
+            color: #00796b;
+        }
+        p {
+            margin: 1rem 0;
+        }
+        .btn {
+            padding: 0.5rem 1.2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin: 0.5rem;
+            cursor: pointer;
+        }
+        .yes {
+            background-color: #00796b;
+            color: white;
+        }
+        .no {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Register for "{{ event.title }}"</h2>
+        <p>Are you sure you want to register?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn yes">Yes, Register Me</button>
+            <a href="{% url 'event_list' %}" class="btn no">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upcoming Events</title>
+    <link rel="stylesheet" href="{% static 'events/style.css' %}">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: rgb(243, 241, 241);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(27, 1, 1, 0.1);
+        }
+
+        .event {
+            padding: 10px 0;
+            border-bottom: 1px solid #362828;
+        }
+
+        .event:last-child {
+            border-bottom: blanchedalmond;
+        }
+
+        .event a {
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .event-date {
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <body>
+    <div class="container">
+    <!-- User Info and Login/Logout buttons -->
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.username }}</p>
+        <!-- REMOVE the form -->
+<form method="post" action="{% url 'logout' %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" style="background:none;border:none;color:rgb(5, 0, 0);cursor:pointer;">Logout</button>
+</form>
+
+
+
+
+    {% else %}
+        <p><a href="{% url 'logout' %}">Logout</a>
+</p>
+    {% endif %}
+
+
+
+
+        <h1>🌟 Upcoming Events</h1>
+
+        {% if events %}
+            {% for event in events %}
+                <div class="event">
+                    <a href="{% url 'event_detail' event.id %}">{{ event.name }}</a>
+                    <div class="event-date">{{ event.date }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No upcoming events.</p>
+        {% endif %}
+    </div>
+</body>
+
+</body>
+</html>
